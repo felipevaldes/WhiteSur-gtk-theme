@@ -20,7 +20,7 @@
 findbar {
 	border: 0 !important;
 	background: var(--gnome-findbar-background) !important;
-	border-bottom: 1px solid var(--gnome-toolbar-border-color) !important;
+	border-top: 1px solid var(--gnome-toolbar-border-color) !important;
 }
 
 #nav-bar:-moz-window-inactive,
@@ -66,25 +66,36 @@ findbar:-moz-window-inactive {
 /* Reorder toolbars */
 #navigator-toolbox #nav-bar, findbar {
 	-moz-box-ordinal-group: 0;
+	order: 0;
 }
 #navigator-toolbox #PersonalToolbar {
 	-moz-box-ordinal-group: 1;
+	order: 1;
 }
 #navigator-toolbox #titlebar {
 	-moz-box-ordinal-group: 2;
+	order: 2;
 }
 #navigator-toolbox toolbar {
 	-moz-box-ordinal-group: 10;
+	order: 10;
 }
 #navigator-toolbox #TabsToolbar {
 	-moz-box-ordinal-group: 100;
+	order: 100;
 }
 
 /* Sidebar */
-#sidebar-box,
+#sidebar-box, #sidebar,
 .sidebar-panel[lwt-sidebar] {
 	color: var(--gnome-toolbar-color) !important;
 	background: var(--gnome-toolbar-background) !important;
+}
+
+.sidebar-splitter {
+	width: 1px !important;
+	background-color: var(--gnome-toolbar-border-color) !important;
+	border: none !important;
 }
 
 /* Customization page */

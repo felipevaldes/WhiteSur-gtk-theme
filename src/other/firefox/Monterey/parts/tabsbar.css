@@ -18,10 +18,6 @@ tab > stack {
 	background-image: none !important;
 }
 
-.tabbrowser-tab {
-	margin: 1px 0 0 0 !important;
-}
-
 .tabbrowser-tab:not([visuallyselected="true"], [multiselected]), .tabbrowser-tab:-moz-lwtheme {
 	color: var(--gnome-tabbar-tab-color) !important;
 }
@@ -36,26 +32,43 @@ tab > stack {
 	transition: background 200ms !important;
 }
 
-.tab-background:not([selected=true]) {
+#TabsToolbar .tabbrowser-tab:not([selected=true]) .tab-background {
 	background: var(--gnome-tabbar-tab-background) !important;
 }
 
-.tab-background:not([selected=true]):-moz-window-inactive {
+#TabsToolbar .tabbrowser-tab:not([selected=true]) .tab-background:-moz-window-inactive {
 	background: var(--gnome-inactive-tabbar-tab-background) !important;
 }
 
 /* Tab hover */
-#TabsToolbar .tabbrowser-tab:hover > .tab-stack > .tab-background:not([selected=true]) {
+#TabsToolbar .tabbrowser-tab:not([selected=true]):hover .tab-background {
 	background: var(--gnome-tabbar-tab-hover-background) !important;
 }
 
 /* Active tab */
-.tab-background[selected=true] {
+.tab-background:is([selected]) {
 	background: var(--gnome-tabbar-tab-active-background) !important;
 }
 
-.tab-background[selected=true]:-moz-window-inactive {
+.tab-background:is([selected]):-moz-window-inactive {
 	background: var(--gnome-inactive-tabbar-tab-active-background) !important;
+}
+
+/* Tab labels */
+tab .tab-label {
+	color: var(--gnome-tabbar-tab-color) !important;
+}
+tab:hover .tab-label {
+	color: var(--gnome-tabbar-tab-hover-color) !important;
+}
+tab[selected] .tab-label {
+	color: var(--gnome-tabbar-tab-active-color) !important;
+}
+tab:-moz-window-inactive .tab-label {
+	color: var(--gnome-inactive-tabbar-tab-color) !important;
+}
+tab[selected]:-moz-window-inactive .tab-label {
+	color: var(--gnome-inactive-tabbar-tab-active-color) !important;
 }
 
 .close-icon {
@@ -112,9 +125,47 @@ tab > stack {
 	margin-top: 0 !important;
 }
 
+.tabbrowser-tab[soundplaying="true"] .tab-icon-image,
+.tabbrowser-tab[muted="true"] .tab-icon-image {
+	margin-top: 3px !important;
+	margin-left: 2px !important;
+}
+
+.tab-icon-overlay {
+	height: 24px !important;
+	width: 24px !important;
+	padding: 4px !important;
+	border-radius: 100px !important;
+}
+
+.tab-icon-overlay:not([crashed]):is([pinned], [sharing]) {
+	top: 0 !important;
+	inset-inline-end: 0 !important;
+}
+
+.tabbrowser-tab .tab-icon-overlay:not([crashed]):is([pinned], [sharing]) {
+	background-color: var(--gnome-tabbar-tab-background) !important;
+}
+
+.tabbrowser-tab[selected=true] .tab-icon-overlay:not([crashed]):is([pinned], [sharing]) {
+	background-color: var(--gnome-tabbar-tab-active-background) !important;
+}
+
+.tabbrowser-tab .tab-icon-overlay:not([crashed]):is([pinned], [sharing]):hover {
+	background-color: var(--gnome-tabbar-tab-hover-background) !important;
+}
+
 /* Remove blue line above tabs */
 .tab-line {
 	display: none;
+}
+
+/* Tab attention dot */
+.tabbrowser-tab:is([image], [pinned]) > .tab-stack > .tab-content[attention]:not([selected="true"]), .tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged]:not([selected="true"]), #firefox-view-button[attention] {
+	background-image: radial-gradient(circle, var(--gnome-tab-attention-icon-color), var(--gnome-tab-attention-icon-color) 2px, transparent 2px) !important;
+	background-position: center bottom 3px !important;
+	background-size: 4px 4px;
+	background-repeat: no-repeat;
 }
 
 .tabbrowser-tab[class*="identity-color-"][pinned] {
@@ -129,7 +180,7 @@ tab > stack {
 #TabsToolbar .toolbarbutton-1,
 #TabsToolbar #tabs-newtab-button,
 #TabsToolbar #new-tab-button {
-	margin: 1px 2px 0 !important;
+	margin: 0 2px !important;
 	padding: 0 10px !important;
 	max-height: 32px !important;
 	min-height: 32px !important;
@@ -160,10 +211,12 @@ tab > stack {
 }
 
 /* firefox-view-button */
-:root:not([privatebrowsingmode="temporary"]):not([firefoxviewhidden]) :is(#firefox-view-button, #wrapper-firefox-view-button) + #tabbrowser-tabs {
+:root:not([privatebrowsingmode="temporary"]):not([firefoxviewhidden]) :is(#firefox-view-button, #wrapper-firefox-view-button) {
+	display: none !important;
+}
+
+:root:not([privatebrowsingmode], [firefoxviewhidden]) :is(toolbarbutton, toolbarpaletteitem) + #tabbrowser-tabs, :root[privatebrowsingmode]:not([firefoxviewhidden]) :is(toolbarbutton:not(#firefox-view-button), toolbarpaletteitem:not(#wrapper-firefox-view-button)) + #tabbrowser-tabs {
 	border-inline-start: none !important;
-	padding-inline-start: 0 !important;
-	margin-inline-start: -40px !important;
 }
 
 #firefox-view-button > .toolbarbutton-icon {

@@ -19,7 +19,7 @@ install() {
 compress() {
   for color in "${C_VARIANTS[@]}"; do
     for solid in "${S_VARIANTS[@]}"; do
-      rm -rf ${RELEASE_DIR}/${THEME_NAME}${color}${solid}${RELEASE_VERSION}.tar.xz
+      rm -rf ${RELEASE_DIR}/${THEME_NAME}${color}${solid}.tar.xz
     done
   done
 
@@ -27,18 +27,18 @@ compress() {
 
   for color in "${C_VARIANTS[@]}"; do
     for solid in "${S_VARIANTS[@]}"; do
-      tar -Jcf ${RELEASE_DIR}/${THEME_NAME}${color}${solid}${RELEASE_VERSION}.tar.xz ${THEME_NAME}${color}${solid}
+      tar -Jcf ${RELEASE_DIR}/${THEME_NAME}${color}${solid}.tar.xz ${THEME_NAME}${color}${solid}
     done
   done
 }
 
-GNOME_VERSION="3-28"
-RELEASE_VERSION="-3-38"
-install && compress
-prompt -s "Compress Gnome${RELEASE_VERSION} version finished!"; echo
+#GNOME_VERSION="3-28"
+#RELEASE_VERSION="-3-38"
+#install && compress
+#prompt -s "Compress Gnome${RELEASE_VERSION} version finished!"; echo
 
-GNOME_VERSION="42-0"
-RELEASE_VERSION="-42-0"
+GNOME_VERSION="44-0"
+RELEASE_VERSION="-last"
 install && compress
 prompt -s "Compress Gnome${RELEASE_VERSION} version finished!"; echo
 
